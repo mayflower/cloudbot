@@ -18,6 +18,10 @@ Also automatisieren wir das.
 
 https://platform.openai.com/account/api-keys
 
+```shell
+EXPORT OPENAI_API_KEY=sk-.....
+```
+
 https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html
 
 
