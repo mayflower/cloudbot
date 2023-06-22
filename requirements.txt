@@ -1,0 +1,7 @@
+langchain
+llama_index
+openai
+fastapi
+gptcache
+uvicorn
+jinja2
