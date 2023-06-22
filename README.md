@@ -5,7 +5,7 @@ Demo!
 
 
 Wie funktionieren gute AI Startups? 
-Im Beispiel: Dinge, bei denen Stunden teure Arbeit eingespart werden können. 
+Im Beispiel: Dinge, bei denen viele Stunden teure Arbeit eingespart werden können. Wie zum Beispiel Rechtsanwälte.
 
 Also machen wir ein Beispiel, was für die CloudLand passt, und machen teure
 Routineaufgaben automatisch. 
@@ -22,12 +22,12 @@ https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html
 
 
 
-'''shell
+```shell
 conda create -n multimillionstartup python=3.10.9
 conda activate multimillionstartup
 
 pip install -r requirements.txt
-'''
+```
 
 
 
