@@ -14,6 +14,10 @@ viel Zeit und sind teuer, nur weil sie ein paar Dinge wissen.
 
 Also automatisieren wir das. 
 
+# Achtung! 
+Der Bot ist eine in 60 Minuten entstandene Demo. Deshalb bekommt er Shell Access mit Zugriff auf kubectl, und damit Zugriff auf Kubernetes. 
+Also bitte nur auf einen lokalen MiniKube oder so anwenden, und nicht gleich mit vollen Adminrechten gegen den Produktionscluster.
+
 # Vorbereitung
 
 https://platform.openai.com/account/api-keys
