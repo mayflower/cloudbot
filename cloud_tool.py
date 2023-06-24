@@ -22,7 +22,7 @@ class CloudInput(BaseModel):
     """List of shell commands to run."""
 
     @root_validator
-    def _validate_commands(self, values: dict) -> dict:
+    def _validate_commands(cls, values: dict) -> dict:
         """Validate commands."""
         command = values.get("commands")
         cmd_name = command.split()[0]
