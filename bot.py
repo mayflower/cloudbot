@@ -166,7 +166,7 @@ agent_chain = initialize_agent(
 
 def ask_ai():
     """Main method to talk to the ai"""
-    print("Welcome to your AI cloud consultant. How can i help You today?")
+    print("Welcome, i am Your AI cloud consultant. How can i help You today?")
     while True:
         query = input("You: ")
         result = agent_chain.run(input=query)
