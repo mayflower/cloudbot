@@ -8,4 +8,4 @@ jinja2
 chromadb
 unstructured[local-inference]
 layoutparser[layoutmodels,tesseract]
-google-search-results
+termcolor
