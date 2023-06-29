@@ -1,7 +1,7 @@
-""" A simple cloud consultant bot that can answer questions about kubernetes, aws and cloud native."""
+""" A simple cloud consultant bot that can answer questions 
+about kubernetes, aws and cloud native."""
 import langchain
 from langchain.agents import Tool, AgentType, initialize_agent
-from cloud_tool import CloudTool
 from langchain.tools import HumanInputRun
 from langchain.callbacks import HumanApprovalCallbackHandler
 from langchain.vectorstores import Chroma
@@ -10,12 +10,14 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
 from termcolor import colored
+from cloud_tool import CloudTool
+from approval import ApprovalCallBackHandler
 
 langchain.debug = False
 
 MODEL = "gpt-3.5-turbo"
 
-cloud_tool = CloudTool(callbacks=[HumanApprovalCallbackHandler()])
+cloud_tool = CloudTool(callbacks=[ApprovalCallBackHandler()])
 cloud_tool.description = cloud_tool.description + f"args {cloud_tool.args}".replace(
     "{", "{{"
 ).replace("}", "}}")
@@ -40,7 +42,7 @@ kubectl_agent_chain = initialize_agent(
     llm=llm,
     agent=AgentType.CHAT_CONVERSATIONAL_REACT_DESCRIPTION,
     memory=kubememory,
-    verbose=True,
+    verbose=False,
     agent_kwargs={
         "prefix": """
 You are a Kubernetes Command line tool (kubectl) expert. 
@@ -57,7 +59,7 @@ aws_agent_chain = initialize_agent(
     llm,
     agent=AgentType.CHAT_CONVERSATIONAL_REACT_DESCRIPTION,
     memory=awsmemory,
-    verbose=True,
+    verbose=False,
     agent_kwargs={
         "prefix": """
 You are a AWS Command line tool (aws cli) expert. 
@@ -67,7 +69,6 @@ Only return the command. If an error is returned, rewrite the command, check the
 """,
     },
 )
-
 
 
 tools = [
@@ -101,11 +102,22 @@ agent_chain = initialize_agent(
 
 def ask_ai():
     """Main method to talk to the ai"""
-    print(colored("Welcome, i am Your AI cloud consultant. How can i help You today?", "green"))
-    while True:
-        query = input(colored("You: ", "white", attrs=["bold"]))
-        result = agent_chain.run(input=query)
-        print(colored("Answer: ", "green", attrs=["bold"]), colored(result, "light_green"))
+    print(
+        colored(
+            "Welcome, i am Your AI cloud consultant. How can i help You today?", "green"
+        )
+    )
+    try:
+        while True:
+            query = input(colored("You: ", "white", attrs=["bold"]))
+            result = agent_chain.run(input=query)
+            print(
+                colored("Answer: ", "green", attrs=["bold"]),
+                colored(result, "light_green"),
+            )
+    except (EOFError, KeyboardInterrupt):
+        print("kthxbye")
+        exit()
 
 
 if __name__ == "__main__":
