@@ -47,8 +47,3 @@ Start the bot on the command line:
 ```shell
 python bot.py
 ```
-
-
-
-
-s
